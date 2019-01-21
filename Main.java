@@ -3,54 +3,66 @@ package com.pratice;
 import java.util.Scanner;
 
 public class Main {
-
-
-
+    public static MobilePhone mobilePhone = new MobilePhone();
+    private static Contacts contacts = new Contacts("N/A","N/A");
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        double total = 0;
 
-        originalBurger burger = new originalBurger(0, "White Bread", "meat patty", 0,0,0,0,0, 0, 0, 0, 1.50, 0);
-        VegetableBurger vegetableBurger = new VegetableBurger(0, "Brown Rye", "meat patty", 0,0,0,0,0, 0, 0, 0, 1.50, 0,0,0,0,0);
-        MeatLoversBurgers meatLoversBurgers = new MeatLoversBurgers(0, "White Bread", "meat patty", 0,0,0,0,0, 0, 0, 0, 1.50, 0);
 
-        System.out.println("Welcome to Bob's burgers, what would you like?");
-        System.out.println("We have the Original Bob's burger, Bob's veggie burger" +
-                "or the super bacony meat lovers burgers?");
-        System.out.println("Press 1 for bob's burger, 2 for the veggie burger and 3 for the meat lovers burger");
-        int answer = scanner.nextInt();
-        boolean isTrue = true;
-        while(isTrue) {
-            switch (answer) {
+        boolean choice = true;
+        while (choice){
+            System.out.println("These are the following options");
+            printOptions();
+            int option = scanner.nextInt();
+            switch(option){
+                case 0:
+                    choice = quit();
+                    break;
                 case 1:
-                    isTrue = false;
-                    burger.burgerComesWith();
-                    burger.additionalToppingsAre();
-                    total = burger.amountOfToppings();
-                    burger.orderTotal(total);
+                    printContact();
                     break;
                 case 2:
-                    isTrue = false;
-                    vegetableBurger.burgerComesWith();
-                    vegetableBurger.additionalToppingsAre();
-                    total = vegetableBurger.amountOfToppings();
-                    vegetableBurger.orderTotal(total);
+                    addContact();
                     break;
-
                 case 3:
-                    isTrue = false;
-                    meatLoversBurgers.burgerComesWith();
-                    meatLoversBurgers.additionalToppingsAre();
-                    total = meatLoversBurgers.amountOfToppings();
-                    meatLoversBurgers.orderTotal(total);
+                    updateContact();
                     break;
-                default:
-                    System.out.println("Invalid item please try again");
+                case 4:
+                    removeContact();
+                    break;
+                case 5:
+                    searchContact();
+                    break;
             }
         }
 
-
     }
 
+    private static void printOptions(){
+        System.out.println("0 is to quit");
+        System.out.println("1 is to print all contacts");
+        System.out.println("2 is to add a contact");
+        System.out.println("3 is to update a contact");
+        System.out.println("4 is to remove a contact");
+        System.out.println("5 is to search for a contact");
+    }
+    private static boolean quit(){
+       return mobilePhone.quit();
+    }
+    private static void printContact(){
+        mobilePhone.printContacts();
+    }
+    private static void addContact(){
+        mobilePhone.addContacts();
+    }
+    private static void updateContact(){
+        mobilePhone.updateContacts();
+    }
+    private static void removeContact(){
+        mobilePhone.removeContacts();
+    }
+    private static void searchContact(){
+        mobilePhone.searchForContacts();
+    }
 }
